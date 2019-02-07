@@ -24,4 +24,3 @@ if (isset($_POST['send_form'])) {
 
     $errorMsg = $success ? '' : true;
 }
-?>
