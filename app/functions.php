@@ -1,15 +1,6 @@
 <?php
 
 /**
- * Возврощает текущий URI
- * @return string текущий URI
- */
-function queryParam(): string
-{
-    return $_SERVER['REQUEST_URI'];
-}
-
-/**
  * Сортирует массив по ключу
  * @param array $array - Массив для сартировки
  * @param int $sort - Метод сартировки
@@ -30,7 +21,6 @@ function array_sort(array &$array, int $sort = SORT_ASC, string $key = 'sort')
 function siteMenu(string $sort = '', string $flat = 'horizontal')
 {
     $menu = require PATH_MENU;
-    $queryString = queryParam();
     $str = '';
 
     array_sort($menu, $sort);
@@ -44,10 +34,9 @@ function siteMenu(string $sort = '', string $flat = 'horizontal')
 function showTitle(): string
 {
     $menu = require PATH_MENU;
-    $queryString = queryParam();
 
     foreach ($menu as $k => $v) {
-        if (strpos($queryString, $v['path']) !== false) {
+        if (strpos($_SERVER['REQUEST_URI'], $v['path']) !== false) {
             return $v['title'];
         }
     }
