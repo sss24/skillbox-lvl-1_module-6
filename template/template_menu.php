@@ -4,10 +4,10 @@
             <? $item = cutTitle($v['title']); ?>
             <? if (strpos($queryString, $v['path']) !== false) : ?>
 
-                <li><a class='active' href='<?= $v['path'] . 'index.php'; ?>'><?= $item ?></a></li>
+                <li><a class='active' href='<?= $v['path']; ?>'><?= $item ?></a></li>
                 <? continue; ?>
             <? endif; ?>
-            <li><a href='<?= $v['path'] . 'index.php'; ?>'><?= $item ?></a></li>
+            <li><a href='<?= $v['path']; ?>'><?= $item ?></a></li>
         <? endforeach; ?>
     </ul>
 </div>
