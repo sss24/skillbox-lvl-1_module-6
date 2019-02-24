@@ -730,3 +730,11 @@ a:hover {
 ul li a.active {
 	text-decoration: underline;
 }
+
+.aut-user-login {
+	display: inline-block;
+	padding: 5px 0;
+
+	color: #777777;
+	font-size: 16px;
+}

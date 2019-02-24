@@ -31,9 +31,14 @@
 
             <div class="project-folders-menu">
                 <ul class="project-folders-v">
-                    <li class="project-folders-v-active"><span>Авторизация</span></li>
-                    <li><a href="#">Регистрация</a></li>
-                    <li><a href="#">Забыли пароль?</a></li>
+<!--                    <li class="project-folders-v-active"><span>Авторизация</span></li>-->
+                    <? if (!empty($_SESSION['user'])): ?>
+                        <li><a href="/?login=no">Выход</a></li>
+                    <? else: ?>
+                        <li class="project-folders-v-active"><a href="/?login=yes">Авторизация</a></li>
+                    <? endif; ?>
+                    <li><a href="/?register=yes">Регистрация</a></li>
+                    <li><a href="/?pass=yes">Забыли пароль?</a></li>
                 </ul>
                 <div style="clear: both;"></div>
             </div>
@@ -43,10 +48,14 @@
 
                         <form class="index-auth" method="POST" action="<?= $_SERVER['PHP_SELF'] . '?login=yes'; ?>">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td class="iat">Ваш e-mail: <br/> <input type="text" size="30" name="login" value="<?= $userLogin ?? ''; ?>"/>
-                                    </td>
-                                </tr>
+                                <? if (isset($_COOKIE['login'])): ?>
+                                    <span>Вы заходили к нам под логином: </span><span class="aut-user-login"> <?= $_COOKIE['login']; ?></span>
+                                <? else : ?>
+                                    <tr>
+                                        <td class="iat">Ваш e-mail: <br/> <input type="text" size="30" name="login" value="<?= $userLogin ?? ''; ?>"/>
+                                        </td>
+                                    </tr>
+                                <? endif; ?>
                                 <tr>
                                     <td class="iat">Ваш пароль: <br/> <input type="password" size="30" name="password" value="<?= $userPassword ?? ''; ?>"/>
                                     </td>
