@@ -11,12 +11,6 @@ define('LIFE_TIME_SESSION', 60 * 20);
 //define('LIFE_TIME_SESSION', 15);
 
 /**
- * LIFE_TIME_COOKIE_DOP - время жизни куки, ответственной за продление сессии
- */
-define('LIFE_TIME_COOKIE_DOP',time() + 60 * 20);
-//define('LIFE_TIME_COOKIE_DOP',time() + 15);
-
-/**
  * LIFE_TIME_COOKIE - время жизни куки (30 суток)
  */
 define('LIFE_TIME_COOKIE', time() + 60 * 60 * 24 * 30);
