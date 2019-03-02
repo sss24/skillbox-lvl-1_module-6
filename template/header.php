@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/app/controller.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/controller.php';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -16,7 +16,7 @@
 <div class="header">
     <div class="logo"><img src="/template/i/logo.png" width="68" height="23" alt="Project"/></div>
     <div style="clear: both"></div>
-    <? siteMenu(SORT_ASC) ?>
+    <?php siteMenu(SORT_ASC) ?>
 </div>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -31,31 +31,32 @@
 
             <div class="project-folders-menu">
                 <ul class="project-folders-v">
-<!--                    <li class="project-folders-v-active"><span>Авторизация</span></li>-->
-                    <? if (!empty($_SESSION['user'])): ?>
+                    <?php if (isset($_SESSION['user'])): ?>
                         <li><a href="/?login=no">Выход</a></li>
-                    <? else: ?>
+                    <?php else: ?>
                         <li class="project-folders-v-active"><a href="/?login=yes">Авторизация</a></li>
-                    <? endif; ?>
+                    <?php endif; ?>
                     <li><a href="/?register=yes">Регистрация</a></li>
                     <li><a href="/?pass=yes">Забыли пароль?</a></li>
                 </ul>
                 <div style="clear: both;"></div>
             </div>
             <div class="index-auth">
-                <? if (empty($success)): ?>
-                    <? if (isset($_GET['login']) && $_GET['login'] == 'yes') : ?>
+                <?php if (isset($success) && !$success): ?>
+                    <?php if (isset($_GET['login']) && ($_GET['login'] == 'yes')) : ?>
 
                         <form class="index-auth" method="POST" action="<?= $_SERVER['PHP_SELF'] . '?login=yes'; ?>">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <? if (isset($_COOKIE['login'])): ?>
-                                    <span>Вы заходили к нам под логином: </span><span class="aut-user-login"> <?= $_COOKIE['login']; ?></span>
-                                <? else : ?>
+
+                                <?php if (isset($_COOKIE['session_continue'])): ?>
+                                    <span>Вы заходили к нам под логином: </span><span class="aut-user-login"> <?= $_COOKIE['user_login']; ?></span>
+                                <?php else : ?>
                                     <tr>
                                         <td class="iat">Ваш e-mail: <br/> <input type="text" size="30" name="login" value="<?= $userLogin ?? ''; ?>"/>
                                         </td>
                                     </tr>
-                                <? endif; ?>
+                                <?php endif; ?>
+
                                 <tr>
                                     <td class="iat">Ваш пароль: <br/> <input type="password" size="30" name="password" value="<?= $userPassword ?? ''; ?>"/>
                                     </td>
@@ -66,14 +67,14 @@
                             </table>
                         </form>
 
-                    <? endif; ?>
-                <? else: ?>
-                    <? require_once $_SERVER['DOCUMENT_ROOT'] . '/include/success.php'; ?>
-                <? endif; ?>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/success.php'; ?>
+                <?php endif; ?>
                 <div>
-                    <? if ($errorMsg == true) : ?>
-                        <? require_once $_SERVER['DOCUMENT_ROOT'] . '/include/error.php'; ?>
-                    <? endif; ?>
+                    <?php if (isset($errorMsg) && $errorMsg) : ?>
+                        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/error.php'; ?>
+                    <?php endif; ?>
                 </div>
             </div>
 
