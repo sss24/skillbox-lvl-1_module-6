@@ -22,8 +22,8 @@ if (isset($_POST['send_form'])) {
 
     $userLogin = isset($_POST['login']) ? $_POST['login'] : (isset($_COOKIE['user_login']) ? $_COOKIE['user_login'] : '');
     $userPassword = $_POST['password'];
-
     $loginKey = array_search($userLogin, $allLog);
+
     if ($loginKey !== false && $allPass[$loginKey] == $userPassword) {
         $success = true;
         $_SESSION['user'] = true;
@@ -34,7 +34,7 @@ if (isset($_POST['send_form'])) {
     $errorMsg = $success ? $errorMsg : true;
 
 } else {
-    if (isset($_SESSION['user']) && isset($_COOKIE['user_login'])) {
+    if (isset($_SESSION['user'])) {
         setcookie('user_login', $_COOKIE['user_login'], LIFE_TIME_COOKIE, '/');
         setcookie('session_id', $_COOKIE['session_id'], time() + LIFE_TIME_SESSION, '/');
     }
